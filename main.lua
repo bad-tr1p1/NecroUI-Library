@@ -1,0 +1,16 @@
+--[[
+    NecroUI - Main script loaded remotely (Version 2.0 Tier-1)
+]]
+local NecroUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/USERNAME/REPO/main/src/init.lua"))()
+
+local Window = NecroUI:CreateWindow({
+    Name = "NecroUI V2 Pro",
+    ThemeColor = Color3.fromRGB(90, 19, 95),
+    LoadingScreen = true,
+    SaveConfig = true,
+    ConfigFolder = "NecroConfigs"
+})
+
+
+
+
