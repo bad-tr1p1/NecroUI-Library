@@ -1,10 +1,10 @@
 --[[
     NecroUI Library Loader
-    Usage: loadstring(game:HttpGet("https://raw.githubusercontent.com/USERNAME/REPO/main/src/init.lua"))()
+    Usage: loadstring(game:HttpGet("https://raw.githubusercontent.com/bad-tr1p1/NecroUI-Library/main/init.lua"))()
 ]]
 
 local Library = {}
-local BaseUrl = "https://raw.githubusercontent.com/USERNAME/REPO/main/src/"
+local BaseUrl = "https://raw.githubusercontent.com/bad-tr1p1/NecroUI-Library/main/"
 
 local function GetFile(name)
     local success, content = pcall(function()

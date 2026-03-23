@@ -1,7 +1,7 @@
 --[[
     NecroUI - Main script loaded remotely (Version 2.0 Tier-1)
 ]]
-local NecroUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/USERNAME/REPO/main/src/init.lua"))()
+local NecroUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/bad-tr1p1/NecroUI-Library/main/init.lua"))()
 
 local Window = NecroUI:CreateWindow({
     Name = "NecroUI V2 Pro",

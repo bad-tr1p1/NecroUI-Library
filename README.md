@@ -14,7 +14,7 @@ NecroUI построена на продвинутой модульной арх
 
 ### Инициализация Библиотеки
 ```lua
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/USERNAME/REPO/main/src/init.lua"))()
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bad-tr1p1/NecroUI-Library/main/init.lua"))()
 
 local Window = Library.new("NecroUI V2 Pro", Color3.fromRGB(155, 89, 182))
 ```
