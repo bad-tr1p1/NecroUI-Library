@@ -1,6 +1,6 @@
 --[[
     NecroUI Library Loader
-    Usage: loadstring(game:HttpGet("https://raw.githubusercontent.com/bad-tr1p1/NecroUI-Library/main/init.lua"))()
+    Usage: loadstring(game:HttpGet("https://raw.githubusercontent.com/bad-tr1p1/NecroUI-Library/main/init.lua?t=" .. tostring(tick())))()
 ]]
 
 local Library = {}

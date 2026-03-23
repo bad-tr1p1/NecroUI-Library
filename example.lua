@@ -3,7 +3,7 @@
     To test this, run server.bat first, then paste this into Roblox.
 ]]
 
-local NecroUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/bad-tr1p1/NecroUI-Library/main/init.lua"))()
+local NecroUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/bad-tr1p1/NecroUI-Library/main/init.lua?t=" .. tostring(tick())))()
 
 local Window = NecroUI:CreateWindow("My Premium Script")
 
