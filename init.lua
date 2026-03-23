@@ -76,7 +76,11 @@ function Library:CreateWindow(config)
     end)
 
     MainGroup:CreateButton("Unload Menu", function()
-        if window.Screen then window.Screen:Destroy() end
+        if window.Unload then
+            window:Unload()
+        elseif window.Screen then 
+            window.Screen:Destroy() 
+        end
     end)
 
     local Settings = window.Settings or {}

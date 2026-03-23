@@ -32,6 +32,7 @@ function Library.new(config)
     UI.Enabled = true
     UI.ToggleKey = Enum.KeyCode.RightControl
     UI.Loaded = false
+    UI.Connections = {}
 
     UI.ThemeColor = windowSettings.ThemeColor
     UI.Settings = windowSettings
@@ -40,7 +41,13 @@ function Library.new(config)
 
     local core = game:GetService("CoreGui")
     local plyGui = game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui")
-    for _, child in pairs(core:GetChildren()) do
+    
+    local targetParent = core
+    pcall(function()
+        if gethui then targetParent = gethui() end
+    end)
+
+    for _, child in pairs(targetParent:GetChildren()) do
         if child.Name == "NecroUI" then child:Destroy() end
     end
     for _, child in pairs(plyGui:GetChildren()) do
@@ -52,7 +59,7 @@ function Library.new(config)
     UI.Screen.ZIndexBehavior = Enum.ZIndexBehavior.Global
     UI.Screen.DisplayOrder = 1000
     UI.Screen.IgnoreGuiInset = true
-    UI.Screen.Parent = core or plyGui
+    UI.Screen.Parent = targetParent or plyGui
 
     UI.Frame = Instance.new("Frame")
     UI.Frame.Name = "Main"
@@ -95,11 +102,11 @@ function Library.new(config)
         UI.Animating = false
     end
 
-    UserInputService.InputBegan:Connect(function(input, gameProcessed)
+    table.insert(UI.Connections, UserInputService.InputBegan:Connect(function(input, gameProcessed)
         if not gameProcessed and input.KeyCode == UI.ToggleKey then
             UI:SetVisible(not UI.Visible)
         end
-    end)
+    end))
 
     local Corner = Instance.new("UICorner")
     Corner.CornerRadius = UDim.new(0, 8)
@@ -126,10 +133,12 @@ function Library.new(config)
 
     task.spawn(function()
         local r = 0
-        RunService.RenderStepped:Connect(function(dt)
+        table.insert(UI.Connections, RunService.RenderStepped:Connect(function(dt)
             r = (r + dt * 45) % 360
-            StrokeGradient.Rotation = r
-        end)
+            if StrokeGradient and StrokeGradient.Parent then
+                StrokeGradient.Rotation = r
+            end
+        end))
     end)
 
     function UI:SetTheme(newColor)
@@ -149,6 +158,16 @@ function Library.new(config)
             if tab.SetTheme then tab:SetTheme(newColor) end
         end
     end
+
+    function UI:Unload()
+        for _, conn in ipairs(UI.Connections) do
+            if conn.Disconnect then conn:Disconnect() end
+        end
+        table.clear(UI.Connections)
+        if UI.Screen then UI.Screen:Destroy() end
+        getgenv().NecroThemeColor = nil
+    end
+
 
     UI.NavBar = Instance.new("Frame")
     UI.NavBar.Name = "NavBar"
